@@ -1,16 +1,21 @@
 import { Link } from 'react-router-dom';
 import './footer.css';
 const Footer = () => {
+  const { token } = JSON.parse(localStorage.getItem('users')) ?? { token: '' };
   return (
     <footer className='footer'>
       <div className='footer-main'>
         <div className='footer-container'>
           <h2>Shop and Learn</h2>
           <div className='footer-content'>
-            <>
-              <Link to='signup'>Sign up</Link>
-              <Link to='signin'>Sign in</Link>
-            </>
+            {token ? (
+              <Link to={'/home'}> Item Lists</Link>
+            ) : (
+              <>
+                <Link to='signup'>Sign up</Link>
+                <Link to='signin'>Sign in</Link>
+              </>
+            )}
           </div>
         </div>
       </div>

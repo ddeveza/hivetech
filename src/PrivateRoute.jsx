@@ -1,14 +1,14 @@
-import { Outlet } from 'react-router-dom';
 import { PageNoAccess } from './component';
+import PublicLayout from './layouts/PublicLayout';
 
 const PrivateRoute = ({ children }) => {
-  const auth = true; //
+  const { token } = JSON.parse(localStorage.getItem('users')) ?? { token: '' };
 
-  if (!auth) {
+  if (!token) {
     return <PageNoAccess />;
   }
 
-  return <Outlet />;
+  return <PublicLayout />;
 };
 
 export default PrivateRoute;

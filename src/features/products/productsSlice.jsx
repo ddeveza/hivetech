@@ -30,6 +30,7 @@ const productsSlice = createSlice({
     builder.addCase(getCategories.pending, (state) => {
       state.loading = true;
     });
+    builder.addCase(getCategories.rejected, (state) => {});
   },
 });
 
