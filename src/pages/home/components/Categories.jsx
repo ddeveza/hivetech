@@ -1,14 +1,29 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../../features/products/asyncThunks';
 import { categoriesSelector } from '../../../features/products/productSelector';
 
 const Categories = () => {
   const categories = useSelector(categoriesSelector);
   const isEmptyCategory = categories && categories.length > 0 ? false : true;
-  const activeCategory = null;
+
+  const dispatch = useDispatch();
+  const [type, setType] = useState('');
+  const [activeCategory, setActiveCategory] = useState('');
+
+  useEffect(() => {
+    dispatch(getProducts({ type, category_id: activeCategory }));
+  }, [dispatch, type, activeCategory]);
 
   return (
     <div className='homepage-content'>
-      <select name='' id='' className='gender-select'>
+      <select
+        name=''
+        id=''
+        className='gender-select'
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+      >
         <option value=''>FILTER BY GENDER</option>
         <option value='male'>Men's</option>
         <option value='female'>Women's</option>
@@ -19,7 +34,7 @@ const Categories = () => {
           <ul>
             <li
               className={!activeCategory ? 'active' : ''}
-              //onClick={() => dispatch(setActiveCategories(''))}
+              onClick={() => setActiveCategory('')}
             >
               All
             </li>
@@ -27,7 +42,7 @@ const Categories = () => {
               categories.map((c) => (
                 <li
                   className={activeCategory === c.id ? 'active' : ''}
-                  //onClick={() => dispatch(setActiveCategories(c.id))}
+                  onClick={() => setActiveCategory(c.id)}
                   key={c.id}
                   to='#'
                 >

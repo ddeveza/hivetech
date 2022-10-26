@@ -7,12 +7,17 @@ const initialState = {
   loading: false,
   success: false,
   error: null,
+  activeCategory: null,
 };
 
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveCategory: (state, { payload }) => {
+      state.activeCategory = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getCategories.fulfilled, (state, { payload }) => {
       state.error = null;
@@ -47,6 +52,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const {} = productsSlice.actions;
+export const { setActiveCategory } = productsSlice.actions;
 
 export default productsSlice.reducer;

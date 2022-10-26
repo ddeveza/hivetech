@@ -1,5 +1,6 @@
 import Categories from './components/Categories';
-import Products from './components/Products';
+import Products from './components/Products/Products';
+
 import './Home.css';
 
 const Home = () => {
