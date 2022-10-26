@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from '../../../features/products/asyncThunks';
 import {
   categoriesSelector,
   loadingSelector,
 } from '../../../features/products/productSelector';
-import { getCategories } from '../../../features/products/productsSlice';
+
 import CategoryCard from './CategoryCard';
 
 const Categories = () => {

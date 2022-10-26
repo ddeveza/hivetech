@@ -2,13 +2,14 @@ import axios from './axios';
 
 class productsApi {
   /* All api request related to products */
-  getCategories = async () => {
-    try {
-      const { data } = await axios.get('/categories/');
-      return data;
-    } catch (error) {
-      return error.message;
-    }
+  getCategories = async () => await axios.get('/categories/');
+
+  getProducts = async (query = {}) => {
+    const response = await axios.get('/products/', {
+      params: query,
+      requireToken: true,
+    });
+    return response;
   };
 }
 
